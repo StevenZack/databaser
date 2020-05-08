@@ -8,10 +8,14 @@
 </head>
 
 <body>
-    <h1>{{.Name}} <a href="/edit?name={{.Name}}">Edit</a></h1>
+    <h1>{{.Name}}</h1>
     <h5>type : {{.Type}}</h5>
     <h5>dsn : {{.Dsn}}</h5>
     <h5>db : {{.DB}}</h5>
+    <div class="">
+        <a href="/edit?name={{.Name}}">Edit</a>
+        <a href="/delete?name={{.Name}}">Delete</a>
+    </div>
 </body>
 
 </html>

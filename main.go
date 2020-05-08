@@ -29,6 +29,8 @@ func main() {
 	server.GET("/edit", handler.Edit_GET)
 	server.POST("/edit", handler.Edit_POST)
 
+	server.GET("/delete", handler.Delete)
+
 	fmt.Println("listen on http://127.0.0.1:" + port)
 	openurl.OpenApp("http://127.0.0.1:" + port)
 	e := server.ListenAndServe()
