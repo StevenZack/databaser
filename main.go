@@ -22,6 +22,7 @@ func main() {
 	server.GET("/", handler.Index)
 
 	server.GET("/connection", handler.Connection_GET)
+	server.POST("/query", handler.Query_POST)
 
 	server.HandleHtml("/new", views.Bytes_NewHtml)
 	server.POST("/new", handler.New_POST)

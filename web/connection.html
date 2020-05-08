@@ -16,6 +16,11 @@
         <a href="/edit?name={{.Name}}">Edit</a>
         <a href="/delete?name={{.Name}}">Delete</a>
     </div>
+    <br><br>
+    <form action="/query?name={{.Name}}" method="POST">
+        <textarea name="query" cols="30" rows="10"></textarea>
+        <input type="submit">
+    </form>
 </body>
 
 </html>
