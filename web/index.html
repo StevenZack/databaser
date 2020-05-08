@@ -12,7 +12,7 @@
     <ul>
         {{ range .}}
         <li>
-            <a href="/connection?name={{.Name}}">[{{.Type}}] {{.Name}}</a>
+            【<b>{{.Type}}</b>】<a href="/connection?name={{.Name}}">{{.Name}}</a>
         </li>
         {{end}}
     </ul>
