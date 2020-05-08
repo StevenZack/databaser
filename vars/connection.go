@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"log"
+	"sort"
 
 	"github.com/StevenZack/databaser/data"
 )
@@ -22,6 +23,7 @@ func SetConnections(vs []data.Connection) {
 		connections.Post("[]")
 		return
 	}
+	sort.Sort(data.ConnectList(vs))
 	b, e := json.Marshal(vs)
 	if e != nil {
 		log.Fatal(e)

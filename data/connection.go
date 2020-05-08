@@ -12,3 +12,11 @@ const (
 	TypeClickhouse = "clickhouse"
 	TypeMongoDB    = "mongodb"
 )
+
+type ConnectList []Connection
+
+func (a ConnectList) Len() int      { return len(a) }
+func (a ConnectList) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
+func (a ConnectList) Less(i, j int) bool {
+	return a[i].Name < a[j].Name
+}
