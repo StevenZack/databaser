@@ -33,6 +33,9 @@ func QueryClickhouse(conn data.Connection, query string) (*data.Result, error) {
 	defer rows.Close()
 
 	for rows.Next() {
+		if len(result.Rows) == 500 {
+			break
+		}
 		result.Columns, e = rows.Columns()
 		if e != nil {
 			log.Println(e)
