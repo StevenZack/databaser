@@ -13,7 +13,7 @@ import (
 	"github.com/go-sql-driver/mysql"
 )
 
-func New_Post(w http.ResponseWriter, r *http.Request) {
+func New_POST(w http.ResponseWriter, r *http.Request) {
 	c := data.Connection{
 		Name: r.FormValue("name"),
 		Type: r.FormValue("type"),
@@ -47,6 +47,14 @@ func New_Post(w http.ResponseWriter, r *http.Request) {
 	default:
 		http.Error(w, "unsupported connection type '"+c.Type+"'", http.StatusInternalServerError)
 		return
+	}
+
+	vs := vars.GetConnections()
+	for _, v := range vs {
+		if v.Name == c.Name {
+			http.Error(w, "name '"+v.Name+"' exists", http.StatusBadRequest)
+			return
+		}
 	}
 	vars.AppendConnection(c)
 	http.Redirect(w, r, "/", http.StatusFound)

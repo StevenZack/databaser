@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Connection</title>
+</head>
+
+<body>
+    <h1>Edit Connection- {{.Name}}</h1>
+    <form action="/edit" method="POST">
+        <input type="text" name="name" placeholder="name" value="{{.Name}}"><br>
+        <select name="type">
+            <option value="mongodb" {{ if eq .Type "mongodb" }} selected {{end}}>mongodb</option>
+            <option value="mysql" {{ if eq .Type "mysql" }} selected {{end}}>mysql</option>
+            <option value="clickhouse" {{ if eq .Type "clickhouse" }} selected {{end}}>clickhouse</option>
+        </select><br>
+        <input type="text" name="dsn" placeholder="dsn" value="{{.Dsn}}"><br>
+        <input type="hidden" name="origin_name" value="{{.Name}}">
+        <input type="submit">
+    </form>
+</body>
+
+</html>

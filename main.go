@@ -20,8 +20,14 @@ func main() {
 	server := mux.NewServer(":" + port)
 
 	server.GET("/", handler.Index)
+
+	server.GET("/connection", handler.Connection_GET)
+
 	server.HandleHtml("/new", views.Bytes_NewHtml)
-	server.POST("/new", handler.New_Post)
+	server.POST("/new", handler.New_POST)
+
+	server.GET("/edit", handler.Edit_GET)
+	server.POST("/edit", handler.Edit_POST)
 
 	fmt.Println("listen on http://127.0.0.1:" + port)
 	openurl.OpenApp("http://127.0.0.1:" + port)

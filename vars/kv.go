@@ -2,6 +2,7 @@ package vars
 
 import (
 	"encoding/json"
+	"errors"
 	"log"
 	"os"
 
@@ -41,4 +42,13 @@ func AppendConnection(c data.Connection) {
 	vs := GetConnections()
 	vs = append(vs, c)
 	SetConnections(vs)
+}
+
+func GetConnectionByName(name string) (data.Connection, error) {
+	for _, v := range GetConnections() {
+		if v.Name == name {
+			return v, nil
+		}
+	}
+	return data.Connection{}, errors.New("connection '" + name + "' not found")
 }

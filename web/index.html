@@ -11,7 +11,9 @@
     <a href="/new">new</a><br>
     <ul>
         {{ range .}}
-        <li>{{.Name}}</li>
+        <li>
+            <a href="/connection?name={{.Name}}">[{{.Type}}] {{.Name}}</a>
+        </li>
         {{end}}
     </ul>
 </body>
