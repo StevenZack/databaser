@@ -20,6 +20,8 @@ func main() {
 	server := mux.NewServer(":" + port)
 
 	server.GET("/", handler.Index)
+	server.HandleFunc("/ws", handler.Ws)
+	server.HandleJs("/vars.js", views.Bytes_VarsJs)
 
 	server.GET("/connection", handler.Connection_GET)
 	server.POST("/query", handler.Query_POST)
@@ -33,7 +35,7 @@ func main() {
 	server.GET("/delete", handler.Delete)
 
 	fmt.Println("listen on http://127.0.0.1:" + port)
-	openurl.OpenApp("http://127.0.0.1:" + port)
+	openurl.Open("http://127.0.0.1:" + port)
 	e := server.ListenAndServe()
 	if e != nil {
 		fmt.Println("listen error :", e)
