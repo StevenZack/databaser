@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New</title>
+</head>
+
+<body>
+    <h1>New Connection</h1>
+    <form action="/new" method="POST">
+        <input type="text" name="name" placeholder="name"><br>
+        <select name="type">
+            <option value="mongodb">mongodb</option>
+            <option value="mysql">mysql</option>
+            <option value="clickhouse">clickhouse</option>
+        </select><br>
+        <input type="text" name="dsn" placeholder="dsn"><br>
+        <input type="submit">
+    </form>
+</body>
+
+</html>
