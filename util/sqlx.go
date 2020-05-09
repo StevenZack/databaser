@@ -36,7 +36,7 @@ func doSqlQuery(conn data.Connection, query string) (*data.Result, error) {
 			log.Println(e)
 			return nil, e
 		}
-		vs := make([]string, len(result.Columns))
+		vs := make([]*string, len(result.Columns))
 		uvs := make([]interface{}, len(result.Columns))
 		for i := range vs {
 			uvs[i] = &vs[i]
@@ -48,7 +48,11 @@ func doSqlQuery(conn data.Connection, query string) (*data.Result, error) {
 		}
 		row := data.Row{}
 		for _, v := range vs {
-			row.Values = append(row.Values, v)
+			s := ""
+			if v != nil {
+				s = *v
+			}
+			row.Values = append(row.Values, s)
 		}
 		result.Rows = append(result.Rows, row)
 	}
