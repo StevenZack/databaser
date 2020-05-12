@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"reflect"
 
 	"github.com/StevenZack/databaser/data"
 )
@@ -36,7 +35,7 @@ func doSqlQuery(conn data.Connection, query string) (*data.Result, error) {
 			log.Println(e)
 			return nil, e
 		}
-		vs := make([]*string, len(result.Columns))
+		vs := make([]interface{}, len(result.Columns))
 		uvs := make([]interface{}, len(result.Columns))
 		for i := range vs {
 			uvs[i] = &vs[i]
@@ -47,10 +46,13 @@ func doSqlQuery(conn data.Connection, query string) (*data.Result, error) {
 			return nil, e
 		}
 		row := data.Row{}
-		for _, v := range vs {
+		for i, v := range vs {
 			s := ""
 			if v != nil {
-				s = *v
+				s = stringify(v)
+			}
+			if result.Columns[i] == "insert_id" {
+				s = ParseUnix(s).String()
 			}
 			row.Values = append(row.Values, s)
 		}
@@ -61,6 +63,8 @@ func doSqlQuery(conn data.Connection, query string) (*data.Result, error) {
 }
 
 func stringify(v interface{}) string {
-	fmt.Println(reflect.TypeOf(v).String())
+	if ints, ok := v.([]uint8); ok {
+		return stringify(ints)
+	}
 	return fmt.Sprint(v)
 }
