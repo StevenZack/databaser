@@ -17,5 +17,10 @@ func QueryMongoDB(conn data.Connection, query string) (*data.Result, error) {
 	}
 	defer c.Disconnect(context.TODO())
 	// c.Database("name").Collection("name").
-	return nil, nil
+	ses, e := c.StartSession(nil)
+	if e != nil {
+		log.Println(e)
+		return nil, e
+	}
+	
 }
